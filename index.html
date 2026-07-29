@@ -963,131 +963,8 @@ url:e,reason:"blocked_domain_not_allowlisted"},b.parentOrigin);throw new DOMExce
                     </script>
                 </div>
 
-                <p class="mt-4 text-sm text-gray-400">*Sekali bayar, akses selamanya + update harian gratis</p>
-            </div>
-            
-            <p class="mt-8 text-sm text-gray-500 flex items-center justify-center">
-                <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"></path></svg>
-                Pembayaran Aman &amp; Rahasia Terjamin 100%
-            </p>
-        </div>
-    </section>
 
-    <footer class="text-center py-8 border-t border-gray-800 text-gray-600 text-sm">
-        <p>© 2026 Film Semi Asia Premium. All rights reserved.</p>
-        <p class="mt-2 text-xs">Untuk usia 18+ ke atas.</p>
-    </footer>
-
-    <!-- Tombol Admin untuk Export HTML (Hanya terlihat saat diedit) -->
-    
-
-    <script>
-        function exportHTML() {
-            // Clone (gandakan) elemen dokumen saat ini
-            let htmlClone = document.documentElement.cloneNode(true);
-            
-            // Hapus tombol admin ini dari hasil clone agar pengunjung web tidak melihatnya
-            let adminBtn = htmlClone.querySelector('#admin-export-btn');
-            if (adminBtn) adminBtn.remove();
-
-            // Hapus semua tombol "Upload Cover" dari hasil clone agar pengunjung tidak bisa ganti gambar
-            let overlays = htmlClone.querySelectorAll('.upload-overlay');
-            overlays.forEach(overlay => overlay.remove());
-
-            // Buat HTML string yang sudah tertanam gambar Base64 (foto yang diupload)
-            let finalHTML = "<!DOCTYPE html>\n<html lang=\"id\">\n" + htmlClone.innerHTML + "\n</html>";
-
-            // Buat file dan trigger download
-            let blob = new Blob([finalHTML], { type: 'text/html' });
-            let url = URL.createObjectURL(blob);
-            let a = document.createElement('a');
-            a.href = url;
-            a.download = 'index_untuk_github.html';
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
-            
-            alert('File berhasil didownload!\n\nSilakan upload file "index_untuk_github.html" ini ke repository GitHub Anda (lalu ubah namanya menjadi "index.html").\n\nGambar sudah tertanam secara permanen dan tombol upload telah disembunyikan untuk pengunjung.');
-        }
-
-        function previewImage(input, imgId) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
                 
-                reader.onload = function(e) {
-                    // Buat image object baru untuk keperluan kompresi
-                    var img = new Image();
-                    img.onload = function() {
-                        // Gunakan canvas untuk mengecilkan ukuran gambar sebelum disimpan
-                        var canvas = document.createElement('canvas');
-                        var ctx = canvas.getContext('2d');
-                        
-                        // Set maksimal dimensi gambar
-                        var MAX_WIDTH = 400;
-                        var MAX_HEIGHT = 533;
-                        var width = img.width;
-                        var height = img.height;
-
-                        if (width > height) {
-                            if (width > MAX_WIDTH) {
-                                height *= MAX_WIDTH / width;
-                                width = MAX_WIDTH;
-                            }
-                        } else {
-                            if (height > MAX_HEIGHT) {
-                                width *= MAX_HEIGHT / height;
-                                height = MAX_HEIGHT;
-                            }
-                        }
-                        
-                        canvas.width = width;
-                        canvas.height = height;
-                        ctx.drawImage(img, 0, 0, width, height);
-
-                        // Ubah ke format JPEG dengan kualitas 80% agar ringan
-                        var dataUrl = canvas.toDataURL('image/jpeg', 0.8);
-
-                        // Update tampilan gambar di website
-                        document.getElementById(imgId).src = dataUrl;
-
-                        // Simpan ke Local Storage browser
-                        try {
-                            localStorage.setItem(imgId, dataUrl);
-                        } catch (err) {
-                            console.error("Error saving to localStorage (mungkin limit penuh): ", err);
-                            // Tetap tampilkan tapi mungkin tidak tersimpan saat refresh
-                        }
-                    }
-                    img.src = e.target.result;
-                }
-                
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-
-        // Memuat gambar yang sudah tersimpan saat halaman dibuka kembali
-        document.addEventListener('DOMContentLoaded', () => {
-            for (let i = 1; i <= 12; i++) {
-                const imgId = 'cover-img-' + i;
-                const savedImg = localStorage.getItem(imgId);
-                if (savedImg) {
-                    const imgElement = document.getElementById(imgId);
-                    if (imgElement) {
-                        imgElement.src = savedImg;
-                    }
-                }
-            }
-        });
-
-        // Add subtle parallax effect to the glow background
-        document.addEventListener('mousemove', (e) => {
-            const glow = document.querySelector('.bg-glow');
-            const x = e.clientX / window.innerWidth;
-            const y = e.clientY / window.innerHeight;
-            
-            glow.style.transform = `translate(calc(-50% + ${x * 20}px), ${y * 20}px)`;
-        });
     </script>
          <!-- Histats.com  START  (aync)-->
 <script type="text/javascript">var _Hasync= _Hasync|| [];
@@ -1103,5 +980,6 @@ hs.src = ('//s10.histats.com/js15_as.js');
 <!-- Histats.com  END  -->
 
 
+                
 </body>
 </html>
